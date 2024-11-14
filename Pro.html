@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Of Pro</title>
+    <style>
+        /* Basic reset and styling */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background-color: #f0f0f0;
+        }
+        /* Navbar styling */
+        .navbar {
+            width: 100%;
+            background-color: #333;
+            display: flex;
+            justify-content: center;
+            padding: 1em 0;
+        }
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            padding: 0.75em 1.5em;
+            margin: 0 10px;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+        .navbar a.twitter { background-color: #1DA1F2; }
+        .navbar a.youtube { background-color: #FF0000; }
+        .navbar a.spotify { background-color: #1DB954; }
+        .navbar a.discord { background-color: #7289DA; }
+        
+        /* Center video */
+        .content {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            width: 100%;
+            max-width: 640px;
+        }
+        iframe {
+            width: 100%;
+            height: 360px;
+        }
+
+        /* Bottom bar */
+        .footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 1em;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <div class="navbar">
+        <a href="https://x.com/PLOTDOTT" target="_blank" class="twitter">Twitter</a>
+        <a href="https://www.youtube.com/@PL0TT" target="_blank" class="youtube">YouTube</a>
+        <a href="https://open.spotify.com/user/31h7agxxvl543vruq7oxobci7yku" target="_blank" class="spotify">Spotify</a>
+        <a href="https://discord.com" target="_blank" class="discord">Discord</a>
+    </div>
+
+    <!-- Center Content with YouTube Video -->
+    <div class="content">
+        <iframe 
+            src="https://www.youtube.com/embed/lXgkuM2NhYI?autoplay=1&muted=0" 
+            frameborder="0" 
+            allow="autoplay; encrypted-media" 
+            allowfullscreen>
+        </iframe>
+    </div>
+
+    <!-- Footer with IP and City Display -->
+    <div class="footer" id="ip-info">
+        Loading your IP and location...
+    </div>
+
+    <script>
+        // Fetch IP and city information
+        async function fetchIPInfo() {
+            try {
+                const response = await fetch('https://ipinfo.io/json?token=a750f0e7a919fd'); // Replace YOUR_TOKEN with actual API token
+                const data = await response.json();
+                document.getElementById('ip-info').innerText = `Your IP: ${data.ip} | City: ${data.city}`;
+            } catch (error) {
+                document.getElementById('ip-info').innerText = "Could not load IP information.";
+            }
+        }
+        fetchIPInfo();
+    </script>
+</body>
+</html>
